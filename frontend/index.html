@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Ved — Portfolio OS</title>
+  <meta name="description" content="An interactive operating-system-style portfolio." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ============================================================
+     BOOT SCREEN
+     ============================================================ -->
+  <div id="boot-screen" role="status" aria-live="polite">
+    <div class="boot-logo"><span id="boot-name">VED</span><span class="blip"></span></div>
+    <div class="boot-sub">PERSONAL OPERATING SYSTEM · v1.0</div>
+    <div class="boot-log" id="boot-log"></div>
+    <div class="boot-bar-track">
+      <div class="boot-bar-fill" id="boot-bar"></div>
+    </div>
+    <div class="boot-pct" id="boot-pct">0%</div>
+  </div>
+
+  <!-- ============================================================
+     DESKTOP
+     ============================================================ -->
+  <div id="desktop">
+    <div id="wallpaper" class="wp-blueprint"></div>
+
+    <nav id="icons" aria-label="Desktop folders"></nav>
+
+    <div id="windows-layer"></div>
+
+    <footer id="taskbar" role="toolbar" aria-label="Taskbar">
+      <button class="power-btn" id="power-btn" aria-label="Power off">⏻</button>
+      <div class="taskbar-divider"></div>
+      <div id="tray" aria-label="Open windows"></div>
+      <div class="taskbar-right">
+        <button class="tb-icon-btn" id="sound-toggle" aria-label="Toggle sound">🔇</button>
+        <button class="tb-icon-btn" id="wallpaper-btn" aria-label="Change wallpaper">🖼️</button>
+        <button class="tb-icon-btn" id="theme-toggle" aria-label="Toggle theme">🌙</button>
+        <div class="clock-block">
+          <div class="clock-time" id="clock-time">--:--</div>
+          <div class="clock-date" id="clock-date">--- -- ----</div>
+        </div>
+      </div>
+    </footer>
+
+    <div id="wallpaper-picker" class="hidden" role="dialog" aria-label="Wallpaper picker">
+      <button class="wp-swatch wp-blueprint selected" data-wp="wp-blueprint" aria-label="Blueprint wallpaper"></button>
+      <button class="wp-swatch wp-aurora" data-wp="wp-aurora" aria-label="Aurora wallpaper"></button>
+      <button class="wp-swatch wp-matrix" data-wp="wp-matrix" aria-label="Matrix wallpaper"></button>
+      <button class="wp-swatch wp-void" data-wp="wp-void" aria-label="Void wallpaper"></button>
+    </div>
+
+    <!-- ============================================================
+       AI BOT FLOATING WIDGET (RIGHT SIDE)
+       ============================================================ -->
+    <div id="ai-bot-float" role="button" aria-label="Ask Ved AI Assistant" tabindex="0">
+      <div class="bot-float-container">
+        <div class="bot-speech-bubble" id="bot-speech-bubble">
+          <span class="bot-bubble-dot"></span>
+          <span class="bot-bubble-text" id="bot-bubble-text">Ask anything about Ved ✨</span>
+        </div>
+        <div class="bot-trigger-btn" id="bot-trigger-btn" title="Ask Ved's AI Assistant">
+          <div class="bot-pulse-ring"></div>
+          <svg class="bot-icon-svg" viewBox="0 0 100 100" fill="currentColor">
+            <line x1="50" y1="35" x2="50" y2="21" stroke="currentColor" stroke-width="4.5" stroke-linecap="round"/>
+            <circle cx="50" cy="18" r="5" fill="currentColor"/>
+            <path d="M37 35 V26 H22 V18" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="22" cy="16" r="5" fill="currentColor"/>
+            <path d="M63 35 V26 H78 V18" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="78" cy="16" r="5" fill="currentColor"/>
+            <rect x="14" y="46" width="6.5" height="17" rx="3.25" fill="currentColor"/>
+            <rect x="79.5" y="46" width="6.5" height="17" rx="3.25" fill="currentColor"/>
+            <path d="M28 35 H72 C77.5 35 82 39.5 82 45 V63 C82 68.5 77.5 73 72 73 H36 L24 83 V73 H28 C22.5 73 18 68.5 18 63 V45 C18 39.5 22.5 35 28 35 Z" fill="rgba(255,255,255,0.06)" stroke="currentColor" stroke-width="4.8" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="38.5" cy="52.5" r="4.5" fill="currentColor"/>
+            <circle cx="61.5" cy="52.5" r="4.5" fill="currentColor"/>
+            <line x1="42" y1="63.5" x2="58" y2="63.5" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div id="shutdown-modal-backdrop">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-label="Shut down confirmation">
+        <div class="modal-icon">⏻</div>
+        <h4>Power off</h4>
+        <p>Do you want to shut down?</p>
+        <div class="modal-actions">
+          <button class="modal-btn" id="cancel-shutdown">Cancel</button>
+          <button class="modal-btn danger" id="confirm-shutdown">Shut down</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+     THANK YOU SCREEN
+     ============================================================ -->
+  <div id="thankyou-screen">
+    <div class="ty-heart">❤️</div>
+    <h2>Thank You for Visiting My Portfolio</h2>
+    <p>I appreciate your time and interest in exploring my work. Feel free to connect with me for collaborations and
+      opportunities. Have a wonderful day!</p>
+    <button class="restart-btn" id="restart-btn">⟲ Restart Portfolio</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
