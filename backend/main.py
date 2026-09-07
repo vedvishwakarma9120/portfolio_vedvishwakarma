@@ -17,7 +17,7 @@ client = Groq(
 
 model = "openai/gpt-oss-120b"
 app = FastAPI(title="Ved AI Portfolio Assistant")
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health():
     return {"status": "ok"}
 
