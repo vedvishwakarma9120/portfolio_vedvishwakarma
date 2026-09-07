@@ -17,6 +17,9 @@ client = Groq(
 
 model = "openai/gpt-oss-120b"
 app = FastAPI(title="Ved AI Portfolio Assistant")
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 app.add_middleware(
     CORSMiddleware,
